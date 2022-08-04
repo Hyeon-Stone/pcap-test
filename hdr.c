@@ -20,7 +20,6 @@ void PrintMAC(uint8_t *mac){
 }
 
 void PrintIP(uint32_t ip){
-//    printf(" %3d.%3d.%3d.%3d  |", ntohl(ip<<24) & 0xFF, ntohl(ip<<16)&0xFF,ntohl(ip<<8)&0xFF,ntohl(ip)&0xFF);
         printf(" %3d.%3d.%3d.%3d  |", ip&0xFF, (ip>>8)&0xFF, (ip>>16)&0xFF, (ip>>24)&0xFF);
 }
 
@@ -46,7 +45,7 @@ void PrintDATA_ASCII(const u_char*data_loc){
 
 void PrintInfo(const u_char* data, int cnt){
     Packet* packet = (Packet*)data;
-    uint16_t Offset;
+    uint16_t Offset = ntohs(packet->IP.Total_len) - (packet->IP.Hl + packet->TCP.Offset)*4;;
     if(ntohs(packet->ETH.type) == ETH_TYPE){
         if(ntohs(packet->IP.Protocol == IP_PROTO)){
             printf("Packet Number = %d\n", cnt);
@@ -57,9 +56,7 @@ void PrintInfo(const u_char* data, int cnt){
             PrintMAC(packet->ETH.Src_mac);
             PrintIP(packet->IP.Src_ip);
             printf(" %8d   |",ntohs(packet->TCP.Src_port));
-            Offset = ntohs(packet->IP.Total_len) - (packet->IP.Hl + packet->TCP.Offset)*4;
             if(Offset >0)
-                // data+(ETH_LEN+ntohs(packet->IP.Total_len))-Offset) : TCP payload start point
                 PrintDATA_HEX((data+(ETH_LEN+ntohs(packet->IP.Total_len))-Offset));
             else
                 printf("  00 00 00 00 00 00 00 00 00 00  |\n");
