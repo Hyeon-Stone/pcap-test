@@ -1,5 +1,5 @@
 # HW2 | pcap-test
-<span style="color:red">_**Please view Terminal Full Screen!!**_</span>
+<span style="background-color:#fff5b1">Please view Terminal Full Screen!!</span>
 ---
 ## Execute
 ```
