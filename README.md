@@ -1,6 +1,6 @@
 # HW2 | pcap-test
 ---
-## Execute | Please view Terminal Full Screen
+## Execute
 ```
 comandline : ./pcap-test <interface>
 ex) pcap-test wlan0
