@@ -59,7 +59,7 @@ void PrintSrc(uint8_t *mac, uint32_t ip, uint16_t port,const u_char* data,uint16
     if(Offset >0)
         PrintDATA_HEX(data);
     else
-        printf("  00 00 00 00 00 00 00 00 00 00  |\n");
+        printf("              NO DATA            |\n");
     printf("----------------------------------------------------------                                    \n");
 }
 
