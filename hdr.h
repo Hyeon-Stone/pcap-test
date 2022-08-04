@@ -34,10 +34,11 @@ typedef struct{
 }TCPHdr;
 #pragma pack(pop)
 
-void PrintMAC(char* msg, uint8_t *mac);
+void PrintMAC(uint8_t *mac);
 
-void PrintIP(char* msg, uint32_t ip);
+void PrintIP(uint32_t ip);
 
-void PrintDATA(char*msg, const u_char*data_loc);
+void PrintDATA_HEX(const u_char*data_loc);
+void PrintDATA_ASCII(const u_char*data_loc);
 
-void PrintInfo(const u_char* data);
+void PrintInfo(const u_char* data, int cnt);
