@@ -25,6 +25,10 @@ void PrintIP(uint32_t ip){
 
 void PrintDATA_HEX(const u_char*data_loc){
     char* tcp_data = (char*)calloc(10,sizeof(char));
+    if(tcp_data == NULL){
+        fprintf(stderr,"Memory Allocation Error\n");
+        exit(-1);
+    }
     strncpy(tcp_data, data_loc, 10);
     printf("  ");
     for(int i=0; i<10; i++)
