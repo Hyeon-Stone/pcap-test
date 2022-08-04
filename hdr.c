@@ -36,8 +36,13 @@ void PrintDATA_HEX(const u_char*data_loc){
         printf(" |\n");
     free(tcp_data);
 }
+
 void PrintDATA_ASCII(const u_char*data_loc){
     char* tcp_data = (char*)calloc(10,sizeof(char));
+    if(tcp_data == NULL){
+        fprintf(stderr,"Memory Allocation Error\n");
+        exit(-1);
+    }
     strncpy(tcp_data, data_loc, 10);
     printf("         ASCII : ");
     for(int i=0; i<10; i++)
@@ -45,6 +50,7 @@ void PrintDATA_ASCII(const u_char*data_loc){
     printf("      |\n");
     free(tcp_data);
 }
+
 void PrintSrc(uint8_t *mac, uint32_t ip, uint16_t port,const u_char* data,uint16_t Offset){
     printf("| Src |");
     PrintMAC(mac);
@@ -56,6 +62,7 @@ void PrintSrc(uint8_t *mac, uint32_t ip, uint16_t port,const u_char* data,uint16
         printf("  00 00 00 00 00 00 00 00 00 00  |\n");
     printf("----------------------------------------------------------                                    \n");
 }
+
 void PrintDst(uint8_t *mac, uint32_t ip, uint16_t port,const u_char* data,uint16_t Offset){
     printf("| Dst |");
     PrintMAC(mac);
@@ -68,6 +75,7 @@ void PrintDst(uint8_t *mac, uint32_t ip, uint16_t port,const u_char* data,uint16
         printf("                                 |\n");
     printf("---------------------------------------------------------------------------------------------\n\n");
 }
+
 void PrintInfo(const u_char* data, int cnt){
     Packet* packet = (Packet*)data;
     uint16_t Offset = ntohs(packet->IP.Total_len) - (packet->IP.Hl + packet->TCP.Offset)*4;;
