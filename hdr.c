@@ -41,8 +41,29 @@ void PrintDATA_ASCII(const u_char*data_loc){
     printf("      |\n");
     free(tcp_data);
 }
-
-
+void PrintSrc(uint8_t *mac, uint32_t ip, uint16_t port,const u_char* data,uint16_t Offset){
+    printf("| Src |");
+    PrintMAC(mac);
+    PrintIP(ip);
+    printf(" %8d   |",ntohs(port));
+    if(Offset >0)
+        PrintDATA_HEX(data);
+    else
+        printf("  00 00 00 00 00 00 00 00 00 00  |\n");
+    printf("----------------------------------------------------------                                    \n");
+}
+void PrintDst(uint8_t *mac, uint32_t ip, uint16_t port,const u_char* data,uint16_t Offset){
+    printf("| Dst |");
+    PrintMAC(mac);
+    PrintIP(ip);
+    printf(" %8d   |",ntohs(port));
+    if(Offset >0)
+        // data+(ETH_LEN+ntohs(packet->IP.Total_len))-Offset) : TCP payload start point
+        PrintDATA_ASCII(data);
+    else
+        printf("                                 |\n");
+    printf("---------------------------------------------------------------------------------------------\n\n");
+}
 void PrintInfo(const u_char* data, int cnt){
     Packet* packet = (Packet*)data;
     uint16_t Offset = ntohs(packet->IP.Total_len) - (packet->IP.Hl + packet->TCP.Offset)*4;;
@@ -52,25 +73,8 @@ void PrintInfo(const u_char* data, int cnt){
             printf("---------------------------------------------------------------------------------------------\n");
             printf("|     |        MAC        |        IP        |    PORT    |               DATA              |\n");
             printf("---------------------------------------------------------------------------------------------\n");
-            printf("| Src |");
-            PrintMAC(packet->ETH.Src_mac);
-            PrintIP(packet->IP.Src_ip);
-            printf(" %8d   |",ntohs(packet->TCP.Src_port));
-            if(Offset >0)
-                PrintDATA_HEX((data+(ETH_LEN+ntohs(packet->IP.Total_len))-Offset));
-            else
-                printf("  00 00 00 00 00 00 00 00 00 00  |\n");
-            printf("----------------------------------------------------------                                    \n");
-            printf("| Des |");
-            PrintMAC(packet->ETH.Des_mac);
-            PrintIP(packet->IP.Des_ip);
-            printf(" %8d   |",ntohs(packet->TCP.Des_port));
-            if(Offset >0)
-                // data+(ETH_LEN+ntohs(packet->IP.Total_len))-Offset) : TCP payload start point
-                PrintDATA_ASCII((data+(ETH_LEN+ntohs(packet->IP.Total_len))-Offset));
-            else
-                printf("                                 |\n");
-            printf("---------------------------------------------------------------------------------------------\n\n");
+            PrintSrc(packet->ETH.Src_mac, packet->IP.Src_ip, packet->TCP.Src_port, (data+(ETH_LEN+ntohs(packet->IP.Total_len))-Offset),Offset);
+            PrintDst(packet->ETH.Des_mac, packet->IP.Des_ip, packet->TCP.Des_port, (data+(ETH_LEN+ntohs(packet->IP.Total_len))-Offset),Offset);
         }
     }
 }
