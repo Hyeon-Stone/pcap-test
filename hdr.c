@@ -20,7 +20,8 @@ void PrintMAC(uint8_t *mac){
 }
 
 void PrintIP(uint32_t ip){
-    printf(" %3d.%3d.%3d.%3d  |", ntohl(ip<<24) & 0xFF, ntohl(ip<<16)&0xFF,ntohl(ip<<8)&0xFF,ntohl(ip)&0xFF);
+//    printf(" %3d.%3d.%3d.%3d  |", ntohl(ip<<24) & 0xFF, ntohl(ip<<16)&0xFF,ntohl(ip<<8)&0xFF,ntohl(ip)&0xFF);
+        printf(" %3d.%3d.%3d.%3d  |", ip&0xFF, (ip>>8)&0xFF, (ip>>16)&0xFF, (ip>>24)&0xFF);
 }
 
 void PrintDATA_HEX(const u_char*data_loc){
