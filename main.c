@@ -35,7 +35,7 @@ int main(int argc, char* argv[]) {
         fprintf(stderr, "pcap_open_live(%s) return null - %s\n", param.dev_, errbuf);
         return -1;
     }
-
+    int cnt = 0;
     while (true) {
         struct pcap_pkthdr* header;
         const u_char* packet;
@@ -45,7 +45,7 @@ int main(int argc, char* argv[]) {
             printf("pcap_next_ex return %d(%s)\n", res, pcap_geterr(pcap));
             break;
         }
-        PrintInfo(packet);
+        PrintInfo(packet,++cnt);
 
         //printf("%u bytes captured\n", header->caplen);
     }
