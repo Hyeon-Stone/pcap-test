@@ -1,8 +1,6 @@
 # HW2 | pcap-test
 ---
-_**Please view Terminal Full Screen!!**_
 
----
 ## Execute
 ```
 comandline : ./pcap-test <interface>
@@ -18,6 +16,9 @@ $ sudo tcpreplay -i dum0 dum0.pcap
 ```
 ---
 ### Result
+_**Please view Terminal Full Screen!!**_
+
+---
 ---
 ![Print Info](https://user-images.githubusercontent.com/79035672/182746508-7c5baeef-d425-4694-88c9-a2f4038ebd41.png)
 ---
