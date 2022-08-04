@@ -1,4 +1,5 @@
 # HW2 | pcap-test
+**Please view Terminal Full Screen**
 ---
 ## Execute
 ```
