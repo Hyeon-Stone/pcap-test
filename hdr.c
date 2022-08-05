@@ -3,10 +3,10 @@
 #include <stdlib.h>
 #include <string.h>
 #include <arpa/inet.h>
+#include "hdr.h"
 #define ETH_TYPE 0x0800
 #define IP_PROTO 6
 #define ETH_LEN 14
-#include "hdr.h"
 
 typedef struct {
     EthHdr ETH;
