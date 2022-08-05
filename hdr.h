@@ -8,7 +8,7 @@ typedef struct{
     uint16_t type;
 }EthHdr;
 typedef struct{
-    uint8_t Hl:4;
+    uint8_t Hl:4;       // Follow Bit Order (Not Byte Order)
     uint8_t Verison:4;
     uint8_t Tos;
     uint16_t Total_len;
@@ -25,7 +25,7 @@ typedef struct{
     uint16_t Des_port;
     uint32_t Seq_num;
     uint32_t Ack_num;
-    uint8_t Reverse_NG:4;
+    uint8_t Reverse_NG:4;   // Follow Bit Order (Not Byte Order)
     uint8_t Offset:4;
     uint8_t Flag;
     uint16_t Window;

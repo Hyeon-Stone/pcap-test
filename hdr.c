@@ -69,7 +69,6 @@ void PrintDst(uint8_t *mac, uint32_t ip, uint16_t port,const u_char* data,uint16
     PrintIP(ip);
     printf(" %8d   |",ntohs(port));
     if(Offset >0)
-        // data+(ETH_LEN+ntohs(packet->IP.Total_len))-Offset) : TCP payload start point
         PrintDATA_ASCII(data);
     else
         printf("                                 |\n");
@@ -85,6 +84,7 @@ void PrintInfo(const u_char* data, int cnt){
             printf("---------------------------------------------------------------------------------------------\n");
             printf("|     |        MAC        |        IP        |    PORT    |               DATA              |\n");
             printf("---------------------------------------------------------------------------------------------\n");
+            // data+(ETH_LEN+ntohs(packet->IP.Total_len))-Offset) : TCP payload start point
             PrintSrc(packet->ETH.Src_mac, packet->IP.Src_ip, packet->TCP.Src_port, (data+(ETH_LEN+ntohs(packet->IP.Total_len))-Offset),Offset);
             PrintDst(packet->ETH.Des_mac, packet->IP.Des_ip, packet->TCP.Des_port, (data+(ETH_LEN+ntohs(packet->IP.Total_len))-Offset),Offset);
         }
