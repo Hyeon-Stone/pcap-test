@@ -35,6 +35,7 @@ void PrintDATA_HEX(const u_char*data_loc){
         printf("%x ",tcp_data[i]);
         printf(" |\n");
     free(tcp_data);
+    tcp_data = NULL;
 }
 
 void PrintDATA_ASCII(const u_char*data_loc){
@@ -49,6 +50,7 @@ void PrintDATA_ASCII(const u_char*data_loc){
         printf("%c",(char)tcp_data[i]);
     printf("      |\n");
     free(tcp_data);
+    tcp_data = NULL;
 }
 
 void PrintSrc(uint8_t *mac, uint32_t ip, uint16_t port,const u_char* data,uint16_t Offset){
