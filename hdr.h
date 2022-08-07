@@ -38,12 +38,8 @@ void PrintMAC(uint8_t *mac);
 
 void PrintIP(uint32_t ip);
 
-void PrintDATA_HEX(const u_char*data_loc);
+void PrintDATA(char* msg,const u_char*data_loc);
 
-void PrintDATA_ASCII(const u_char*data_loc);
-
-void PrintSrc(uint8_t *mac, uint32_t ip, uint16_t port, const u_char* data, uint16_t Offset);
-
-void PrintDst(uint8_t *mac, uint32_t ip, uint16_t port,const u_char* data,uint16_t Offset);
+void Print(char* msg, uint8_t *mac, uint32_t ip, uint16_t port,const u_char* data,uint16_t Offset);
 
 void PrintInfo(const u_char* data, int cnt);
